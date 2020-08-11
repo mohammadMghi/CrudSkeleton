@@ -3,12 +3,13 @@ namespace App\Infrastructure\Persistence\Crud\MangoDB;
 
  
 use App\Domain\Crud\Repository\CrudRepository;
+use App\Domain\Helper\Traits\HelperInfra;
 use App\Domain\Model\Crud;
 use App\Domain\User\User;
 use App\Infrastructure\db\MongoDB;
 
 class CrudMongoDB extends MongoDB implements CrudRepository{
-    
+    use HelperInfra;
     private $usersCollection;
     public function __construct($db = null)
     {
@@ -31,16 +32,20 @@ class CrudMongoDB extends MongoDB implements CrudRepository{
         $crud->setId($oid['$oid']);
         return $crud;
     }
-    public function read()
+    public function read(string $username) : Crud
     {
+        $crud = $this->usersCollection->findOne(['username' =>$username]);
+        $this->isEmptyCrud($crud);
+        $crud = $this->setCrud($crud);
         
+        return $crud;
     }
-    public function update()
+    public function update(Crud $crud) : Crud
     {
         # code...
     }
 
-    public function delete()
+    public function delete($id) : bool
     {
         # code...
     }

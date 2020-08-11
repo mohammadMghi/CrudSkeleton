@@ -8,9 +8,9 @@ interface CrudRepository{
 
     public function create(Crud $crud) : Crud;
 
-    public function read();
+    public function read(string $username) : Crud;
     
-    public function update();
+    public function update(Crud $crud) : Crud;
 
-    public function delete();
+    public function delete($id) : bool;
 }

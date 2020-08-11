@@ -28,19 +28,7 @@ class Crud implements JsonSerializable
      */
     private $lastName;
 
-    /**
-     * @param int|null  $id
-     * @param string    $username
-     * @param string    $firstName
-     * @param string    $lastName
-     */
-    public function __construct(?int $id, string $username, string $firstName, string $lastName)
-    {
-        $this->id = $id;
-        $this->username = strtolower($username);
-        $this->firstName = ucfirst($firstName);
-        $this->lastName = ucfirst($lastName);
-    }
+ 
 
      
     /**
@@ -59,12 +47,19 @@ class Crud implements JsonSerializable
         return $this->id;
     }
 
+
+
     /**
      * @return string
      */
     public function getUsername(): string
     {
         return $this->username;
+    }
+
+    public function setUsername(string $username)
+    {
+        $this->username = $username;
     }
 
     /**
@@ -75,6 +70,11 @@ class Crud implements JsonSerializable
         return $this->firstName;
     }
 
+    public function setFirstName(string $firstname)
+    {
+        $this->firstName = $firstname;
+    }
+
     /**
      * @return string
      */
@@ -82,6 +82,12 @@ class Crud implements JsonSerializable
     {
         return $this->lastName;
     }
+
+    public function setLastName(string $lastname)
+    {
+       $this->lastName = $lastname;
+    }
+
 
     /**
      * @return array

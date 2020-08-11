@@ -1,18 +1,15 @@
 <?php
-declare(strict_types=1);
-
 namespace Tests\Application\Actions\Crud;
 
 use App\Application\Actions\ActionPayload;
 use Tests\TestCase;
 
-class CreateAction extends TestCase{
-    public function testAction()
-    {
+class ReadActionTest extends TestCase{
+    public function testAction(){
         $app = $this->getAppInstance();
         
-        $request = $this->createRequest('POST' , 'crud/create');
-        $request = $request->withParsedBody(['username' => 'mohammad123','firstname'=>'mohammad' , 'lastname'=> 'moghadasi']);
+        $request = $this->createRequest('POST' , 'crud/read');
+        $request = $request->withParsedBody(['username' => 'mohammad123']);
         $response = $app->handle($request);
 
         $payload = (string) $response->getBody();
@@ -21,6 +18,5 @@ class CreateAction extends TestCase{
         $serializedPayload = json_encode($expectedPayload,JSON_PRETTY_PRINT);
         
         $this->assertEquals($serializedPayload,$payload);
-        
     }
 }
